@@ -19,7 +19,7 @@ class App extends Component {
 
         <Route path="/dakoku" component={Dakoku} />
         <Route 
-          path="/jobs/:id"
+          path="/jobs/:id/:year/:month"
           render={
             ({match}) => <Jobs id={match.params.id} year={match.params.year}
                               month={match.params.month} />

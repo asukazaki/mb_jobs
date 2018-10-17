@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Alert,Table} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 // export default function Jobs({id,year,month}){
 export default class Jobs extends React.Component {
@@ -8,7 +9,7 @@ export default class Jobs extends React.Component {
         this.props.onMount(this.props.id,this.props.year,this.props.month);
     }
     componentWillReceiveProps(nextProps){
-        if(this.props.id !== nextProps.id){
+        if(this.props.month !== nextProps.month){
             // ページ遷移発生
             this.props.onUpdate(nextProps.id,nextProps.year,nextProps.month);
         }
@@ -27,6 +28,11 @@ export default class Jobs extends React.Component {
                     } else {
                         return (
                             <div>
+                                <div>
+                                <Link to="/jobs/1/2018/05">前月</Link>
+                                2018/06
+                                <Link to="/jobs/1/2018/07">来月</Link>
+                                </div>
                                 <Alert bsStyle="danger">
                                     <strong>BootStrapのサンプルです!</strong> Best check yo self, you're not looking too
                                     good.
