@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Alert,Table} from 'react-bootstrap';
+import {Route,Link} from 'react-router-dom';
+import  * as JobsAA from '../containers/Jobs';
 
 // export default function Jobs({id,year,month}){
 export default class Jobs extends React.Component {
@@ -27,6 +29,18 @@ export default class Jobs extends React.Component {
                     } else {
                         return (
                             <div>
+                                <div>
+                                <Link to="/jobs/1/2018/05">前月</Link>
+                                2018/06
+                                <Link to="/jobs/1/2018/07">来月</Link>
+                                <Route 
+                                    path="/jobs/:id"
+                                    render={
+                                        ({match}) => <JobsAA id={match.params.id} year={match.params.year}
+                                                        month={match.params.month} />
+                                    }
+                                    />
+                                </div>
                                 <Alert bsStyle="danger">
                                     <strong>BootStrapのサンプルです!</strong> Best check yo self, you're not looking too
                                     good.
