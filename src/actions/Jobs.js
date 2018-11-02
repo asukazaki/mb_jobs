@@ -46,6 +46,7 @@ export const fetchJobs = (id, year, month) => {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '<a href="http://localhost:3000" target="_blank" rel="noreferrer" style="cursor:help;display:inline !important;">http://localhost:3000</a>'})
               .end((err,res) => {
+                  // TODO: エラーハンドリング
                   if(err != null)  dispatch(receiveData(id,year,month,true,null))
                   dispatch(receiveData(id,year,month,null,res));
               })

@@ -9,14 +9,14 @@ export default class Jobs extends React.Component {
         this.props.onMount(this.props.id,this.props.year,this.props.month);
     }
     componentWillReceiveProps(nextProps){
-        if(this.props.month !== nextProps.month){
+        if(this.props.month !== nextProps.month || this.props.year !== nextProps.year){
             // ページ遷移発生
             this.props.onUpdate(nextProps.id,nextProps.year,nextProps.month);
         }
     }
 
     render(){
-        const {kintais, monthOverTime,error} = this.props;
+        const {id,year,month,kintais, monthOverTime,error} = this.props;
         return(
 
             <div>
@@ -29,14 +29,11 @@ export default class Jobs extends React.Component {
                         return (
                             <div>
                                 <div>
-                                <Link to="/jobs/1/2018/05">前月</Link>
-                                2018/06
-                                <Link to="/jobs/1/2018/07">来月</Link>
+                                <Link to={getLastMonthUrl(id,year,month)}>前月</Link>
+                                {year}/{month}
+                                <Link to={getNextMonthUrl(id,year,month)}>来月</Link>
                                 </div>
-                                <Alert bsStyle="danger">
-                                    <strong>BootStrapのサンプルです!</strong> Best check yo self, you're not looking too
-                                    good.
-                                </Alert>
+
                             <Table striped>
                                 <tbody>
                                 <tr>
@@ -94,9 +91,30 @@ Jobs.PropTypes ={
     error:PropTypes.bool.isRequired
 };
 
-// TODO: id だけ受け取って、デフォルトは今の月とかにしたい
+// TODO: default値のままの時のハンドリング
 Jobs.defaultProps = {
-    id : 1,
-    year : "2018",
-    month : "06"
+    id : undefined,
+    year : undefined,
+    month : undefined
 };
+
+const getLastMonthUrl = (id,year,month) => {
+    // 引数のdate
+    var dt = new Date(year,(Number(month)-1),1);
+    // 先月
+    dt.setMonth(dt.getMonth() -1);
+    // 表示上を合わせる(+1して０埋め)
+    const lastMonth = ("00" + String((dt.getMonth()+1))).slice(-2);
+    return `/jobs/${id}/${dt.getFullYear()}/${lastMonth}`
+};
+
+const getNextMonthUrl = (id,year,month) => {
+    // 引数のdate
+    var dt = new Date(year,(Number(month)-1),1);
+    // 先月
+    dt.setMonth(dt.getMonth() +1);
+    // 表示上を合わせる(+1して０埋め)
+    const nextMonth = ("00" + String((dt.getMonth()+1))).slice(-2);
+    return `/jobs/${id}/${dt.getFullYear()}/${nextMonth}`
+}
+
