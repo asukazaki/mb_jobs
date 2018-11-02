@@ -2,16 +2,25 @@ import {connect} from 'react-redux';
 import Jobs from '../components/Jobs';
 import * as actions from '../actions/Jobs';
 
-// TODO:
+/*
+    component　から　store内のstateが参照できるように渡す。
+    store:state => component:props
+*/
 const mapStateToProps = (state, ownProps) => ({
     id: ownProps.id,
-    year:ownProps.year,
-    month: ownProps.month,
+    // year:ownProps.year,
+    // month: ownProps.month,
+    year: state.Jobs.year!==undefined ? state.Jobs.month : ownProps.year,
+    month : state.Jobs.month!==undefined ? state.Jobs.month : ownProps.month,
     kintais:state.Jobs.kintais,
     monthOverTime:state.Jobs.monthOverTime,
     error:state.Jobs.error
 });
 
+/*
+    component が store内のdispatch呼べるように渡す。
+    onMount()とonUpdate()というメソッドとして渡している。
+*/
 const mapDispatchToProps = dispatch => ({
     // onMountとonUpdateとJobsを接続
     onMount(id,year,month){
