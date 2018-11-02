@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Alert,Table} from 'react-bootstrap';
+import Navi from './Navi';
 
 // export default function Jobs({id,year,month}){
 export default class Jobs extends React.Component {
@@ -8,17 +9,20 @@ export default class Jobs extends React.Component {
         this.props.onMount(this.props.id,this.props.year,this.props.month);
     }
     componentWillReceiveProps(nextProps){
-        if(this.props.id !== nextProps.id){
-            // ページ遷移発生
-            this.props.onUpdate(nextProps.id,nextProps.year,nextProps.month);
-        }
+        // if(this.props.month !== nextProps.month){
+        //     // ページ遷移発生
+        //     this.props.onUpdate(nextProps.id,nextProps.year,nextProps.month);
+        // }
     }
+
+    
 
     render(){
         const {kintais, monthOverTime,error} = this.props;
         return(
 
             <div>
+                
                 {(() => {
                     if(error){
                         return <p>エラーが発生しました</p>;
@@ -27,10 +31,6 @@ export default class Jobs extends React.Component {
                     } else {
                         return (
                             <div>
-                                <Alert bsStyle="danger">
-                                    <strong>BootStrapのサンプルです!</strong> Best check yo self, you're not looking too
-                                    good.
-                                </Alert>
                             <Table striped>
                                 <tbody>
                                 <tr>
@@ -91,6 +91,6 @@ Jobs.PropTypes ={
 // TODO: id だけ受け取って、デフォルトは今の月とかにしたい
 Jobs.defaultProps = {
     id : 1,
-    year : "2018",
-    month : "06"
+    year : new Date().getFullYear(),
+    month : ("00"+String((new Date().getMonth()+1))).slice(-2)
 };

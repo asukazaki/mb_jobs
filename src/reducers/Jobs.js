@@ -26,6 +26,8 @@ const getMonthOverTime = response => {
 // 初期状態
 const initialState = {
     id : undefined,
+    year:undefined,
+    month:undefined,
     kintais : undefined,
     monthOverTime : undefined,
     error: false
@@ -37,6 +39,8 @@ export default (state = initialState, action) => {
         case 'START_REQUEST':
             return {
                 id : action.payload.id,
+                year : action.payload.year,
+                month : action.payload.month,
                 kintais : undefined,
                 monthOverTime : undefined,
                 error: false
@@ -47,6 +51,7 @@ export default (state = initialState, action) => {
               ? { ...state, error:true}
               : {
                   ...state,
+                  month: action.payload.month,
                   kintais: getKintaiInfo(action.payload.response),
                 //   monthOverTime : action.payload.response.monthOverTime
                 monthOverTime : getMonthOverTime(action.payload.response)

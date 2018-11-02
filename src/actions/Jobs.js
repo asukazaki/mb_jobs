@@ -22,6 +22,11 @@ const finishRequest = (id,year,month) => ({
     payload :{id,year,month},
 });
 
+// const nextMonth = (id,year,month) => ({
+//     type: 'NEXT_MONTH',
+//     payload:{id,year,month}
+// });
+
 // 一覧取得
 export const fetchJobs = (id, year, month) => {
     // return async dispatch => {
@@ -46,8 +51,12 @@ export const fetchJobs = (id, year, month) => {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '<a href="http://localhost:3000" target="_blank" rel="noreferrer" style="cursor:help;display:inline !important;">http://localhost:3000</a>'})
               .end((err,res) => {
-                  if(err != null)  dispatch(receiveData(id,year,month,true,null))
-                  dispatch(receiveData(id,year,month,null,res));
+                  if(err != null) {
+                       dispatch(receiveData(id,year,month,true,null))
+                  } else {
+                    dispatch(receiveData(id,year,month,null,res));
+                  }
+                  
               })
                   
             // const responce = await fetchJsonp(API_URL + id + '/' + year + '/' + month, settings);
