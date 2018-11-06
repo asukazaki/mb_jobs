@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 // import Jobs from './components/Jobs';
 import Jobs from './containers/Jobs';
-import Dakoku from './components/Dakoku';
+import Dakoku from './containers/Dakoku';
 import JobsLink from './containers/JobsLink';
 
 // import logo from './logo.svg';
