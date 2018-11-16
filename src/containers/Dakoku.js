@@ -8,7 +8,7 @@ const mapStateToProps = (state,ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    postDakoku(dakokuType){
+    postDakoku(id,dakokuType){
         dispatch(actions.postDakoku(id,dakokuType))
     }
 })

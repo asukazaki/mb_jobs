@@ -9,7 +9,7 @@ const receiveDakokuResponse = (id,dakokuType,time,error,response) => ({
     payload:{id,dakokuType,time,error,response}
 });
 
-const postDakoku = (id,dakokuType) => {
+export const postDakoku = (id,dakokuType) => {
     return dispatch => {
         const[year, month, day, time] = getNowDate();
 

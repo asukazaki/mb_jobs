@@ -6,33 +6,35 @@ import "../css/dakoku.css";
 
 export default class Dakoku extends React.Component {
   render() {
-      const [id,messgaes,postDakoku] = this.props;
+      const {id,messages,postDakoku} = this.props;
     return (
-        <div class="application">
-        <aside class="side-area">
-            <div class="date-wrapper">
-                <div class="date">2018/11/13(火)</div>
-                <div class="time">08:48</div>
-                <button class="dakoku-edit">打刻修正</button>
+        <div className="application">
+        <aside className="side-area">
+        
+            <div className="date-wrapper">
+                <div className="date">2018/11/13(火)</div>
+
+                <div className="time">08:48 {messages.length}</div>
+                <button className="dakoku-edit">打刻修正</button>
+                <ul>
+                    {messages.map((m,index) => (
+                        <li key={index}>{m}</li>
+                    ))}
+                </ul>
             </div>
         </aside>
 
-        <main class="content">
-            <div class="dakoku-buttun-wrapper">
+        <main className="content">
+            <div className="dakoku-buttun-wrapper">
                 <ul>
-                    <li class="shutaikin">
-                        <button class="shukkin" onClick={(e) => postDakoku(id,'SYUKKIN')}>出勤</button>
-                        <button class="taikin">退勤</button>
+                    <li className="shutaikin">
+                        <button className="shukkin" onClick={(e) => postDakoku(id,'SYUKKIN')}>出勤</button>
+                        <button className="taikin">退勤</button>
                     </li>
-                    <li class="kyukei">
-                        <button class="kyukei-start">休憩開始</button>
-                        <button class="kyukei-end">休憩終了</button>
+                    <li className="kyukei">
+                        <button className="kyukei-start">休憩開始</button>
+                        <button className="kyukei-end">休憩終了</button>
                     </li>
-                </ul>
-                <ul>
-                    {messgaes.map((m) => {
-                        <li>m</li>
-                    })}
                 </ul>
             </div>
         </main>
@@ -42,12 +44,11 @@ export default class Dakoku extends React.Component {
 }
 
 Dakoku.PropTypes = {
-//   id: PropTypes.number,
-//   year: PropTypes.string,
-//   month: PropTypes.string
+  id: PropTypes.number
+//   messages : []
 };
 
 Dakoku.defaultProps = {
-  id : undefined,
+  id : 1,
   messgaes : [],
 };

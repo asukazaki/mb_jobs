@@ -12,12 +12,13 @@ export default (state = initialState,action) => {
         return action.payload.error
         ? {...state, error:true}
         : {
+            // ...state,
             ...state,
             id:action.payload.id,
             // dakokuType: action.payload.dakokuType,
             // time : action.payload.time,
             messages : state.messages.concat([action.payload.time + action.payload.dakokuType + ' 打刻しました'])
-        }
+        };
         default :
             return state;
     }
