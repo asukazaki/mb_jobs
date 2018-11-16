@@ -1,0 +1,73 @@
+
+.content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-area{
+    width: 30%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left:2em;
+}
+
+.date-wrapper {
+    margin-left: 5%;
+    width: 90%;
+    height: 50%;
+    text-align: left;
+}
+
+.date-wrapper .date {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.date-wrapper .time {
+    width: 100%;
+    font-size: 7em;
+}
+
+.dakoku-buttun-wrapper li {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dakoku-buttun-wrapper button {
+    width: 10em;
+    height: 10em;
+    border-radius: 10em;
+    margin-top: 1.5em;
+    margin-left: 0.5em;
+    font-size: 2em;
+    background: white;
+    border: 1px solid;
+}
+
+.shutaikin button {
+    color: rgb(57, 107, 120);
+}
+
+.shutaikin button:hover {
+    color: white;
+    background: rgb(57, 107, 120);
+    transition: 0.8s;
+}
+.kyukei button{
+    color: rgb(121, 37, 34);
+}
+
+.kyukei button:hover{
+    color: white;
+    background: rgb(121, 37, 34);
+    transition: 0.8s;
+}
+
+

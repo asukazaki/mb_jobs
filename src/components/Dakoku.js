@@ -1,26 +1,53 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-export default function Dakoku({id,year,month}){
-    return(
-        <div>
-            <h2>打刻コンポーネント</h2>
-            <p>id :{id}</p>
-            <p>year : {year}</p>
-            <p>month :{month}</p>
-        </div>
-    )
+import "../css/common.css";
+import "../css/dakoku.css";
+
+export default class Dakoku extends React.Component {
+  render() {
+      const [id,messgaes,postDakoku] = this.props;
+    return (
+        <div class="application">
+        <aside class="side-area">
+            <div class="date-wrapper">
+                <div class="date">2018/11/13(火)</div>
+                <div class="time">08:48</div>
+                <button class="dakoku-edit">打刻修正</button>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="dakoku-buttun-wrapper">
+                <ul>
+                    <li class="shutaikin">
+                        <button class="shukkin" onClick={(e) => postDakoku(id,'SYUKKIN')}>出勤</button>
+                        <button class="taikin">退勤</button>
+                    </li>
+                    <li class="kyukei">
+                        <button class="kyukei-start">休憩開始</button>
+                        <button class="kyukei-end">休憩終了</button>
+                    </li>
+                </ul>
+                <ul>
+                    {messgaes.map((m) => {
+                        <li>m</li>
+                    })}
+                </ul>
+            </div>
+        </main>
+      </div>
+    );
+  }
 }
 
-Dakoku.PropTypes ={
-    id:PropTypes.number,
-    year:PropTypes.string,
-    month:PropTypes.string
+Dakoku.PropTypes = {
+//   id: PropTypes.number,
+//   year: PropTypes.string,
+//   month: PropTypes.string
 };
 
-// TODO: id だけ受け取って、デフォルトは今の月とかにしたい
 Dakoku.defaultProps = {
-    id : 1,
-    year : "2018",
-    month : "06"
+  id : undefined,
+  messgaes : [],
 };
