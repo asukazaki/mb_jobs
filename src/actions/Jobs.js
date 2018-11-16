@@ -22,6 +22,11 @@ const finishRequest = (id,year,month) => ({
     payload :{id,year,month},
 });
 
+const validate = (index,kintais,name,value,eventType,jobStateCode) => ({
+    type : 'VALIDATE',
+    payload :{index,kintais,name,value,eventType,jobStateCode},
+})
+
 // 一覧取得
 export const fetchJobs = (id, year, month) => {
     // return async dispatch => {
@@ -60,3 +65,9 @@ export const fetchJobs = (id, year, month) => {
         dispatch(finishRequest(id,year,month));
     };
 };
+
+export const execValidate = (index,kintais,name,value,eventType,jobStateCode) => {
+    return dispatch => {
+        return dispatch(validate(index,kintais,name,value,eventType,jobStateCode))
+    }
+}

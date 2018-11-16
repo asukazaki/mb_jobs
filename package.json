@@ -27,6 +27,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "prettier": "1.15.2",
     "watchify": "^3.11.0"
   }
 }

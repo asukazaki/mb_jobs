@@ -1,24 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+import React from "react";
+import PropTypes from "prop-types";
+import { Button } from "react-bootstrap";
 
-import  '../Dakoku.css';
+import "../Dakoku.css";
 
 // export default function Dakoku({id,year,month,messages,postDakoku}){
-export default class Dakoku extends React.Component{
-    componentDidMount(){
-        this.props.startClock();
-    }
+export default class Dakoku extends React.Component {
+  componentDidMount() {
+    this.props.startClock();
+  }
 
-    render(){
-        const {id,year,month,messages,postDakoku,hh,mm,ss} = this.props;
-    return(
+  render() {
+    const { id, year, month, messages, postDakoku, hh, mm, ss } = this.props;
+    return (
+      <div>
         <div>
-            <div>
-            <p>id :{id}</p>
-            </div>
+          <p>id :{id}</p>
+        </div>
 
-            {/* <div>
+        {/* <div>
             <Button bsStyle="info" onClick= {() => postDakoku(id,"SYUKKIN")}>出勤</Button>
             <Button bsStyle="info">退勤</Button>
             <Button bsStyle="info">休憩開始</Button>
@@ -33,45 +33,68 @@ export default class Dakoku extends React.Component{
                  }
              </ul> */}
 
-             <div className="container">
-               <div className="row">
-                 <div className="col-lg-4"><span className="display-3">{hh}:{mm}:{ss}</span>
-                 <ul>
-                 {messages.map((m,index) =>(
-                      <li key={index}>{m}</li>
-                    )
-                 )
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4">
+              <span className="display-3">
+                {hh}:{mm}:{ss}
+              </span>
+              <ul>
+                {messages.map((m, index) => (
+                  <li key={index}>{m}</li>
+                ))}
+              </ul>
+            </div>
 
-                 }
-             </ul> 
-                 </div>
-                 
-                 <div className="col-lg-8">
-                 <div className="row">
-                    <div className="col-lg-6"><button className="dakoku_btn" onClick= {() => postDakoku(id,"SYUKKIN")}> 出勤 </button></div>
-                    <div className="col-lg-6"><button className="dakoku_btn" onClick= {() => postDakoku(id,"TAIKIN")}> 退勤 </button></div>
-                    <div className="col-lg-6"><button className="dakoku_btn"> 休憩開始 </button></div>
-                    <div className="col-lg-6"><button className="dakoku_btn"> 休憩終了 </button></div>
-                 </div>
-                 </div>
+            <div className="col-lg-8">
+              <div className="row">
+                <div className="col-lg-6">
+                  <button
+                    className="dakoku_btn"
+                    onClick={() => postDakoku(id, "SYUKKIN")}
+                  >
+                    {" "}
+                    出勤{" "}
+                  </button>
+                </div>
+                <div className="col-lg-6">
+                  <button
+                    className="dakoku_btn"
+                    onClick={() => postDakoku(id, "TAIKIN")}
+                  >
+                    {" "}
+                    退勤{" "}
+                  </button>
+                </div>
+                <div className="col-lg-6">
+                  <button className="dakoku_btn"> 休憩開始 </button>
+                </div>
+                <div className="col-lg-6">
+                  <button className="dakoku_btn"> 休憩終了 </button>
+                </div>
               </div>
             </div>
+          </div>
         </div>
+      </div>
     );
-}
+  }
 }
 
-Dakoku.PropTypes ={
-    id:PropTypes.number,
-    messages:[],
-    didSyukkin:PropTypes.bool,
-    hh:PropTypes.string,
-    mm:PropTypes.string,
-    ss:PropTypes.string
+Dakoku.PropTypes = {
+  id: PropTypes.number,
+  messages: [],
+  didSyukkin: PropTypes.bool,
+  hh: PropTypes.string,
+  mm: PropTypes.string,
+  ss: PropTypes.string
 };
 
 Dakoku.defaultProps = {
-    id : 1,
-    messages:[],
-    didSyukkin:false
+  id: 1,
+  messages: [],
+  didSyukkin: false,
+  hh: ("00" + String(new Date().getHours())).slice(-2),
+  mm: ("00" + String(new Date().getMinutes())).slice(-2),
+  ss: ("00" + String(new Date().getSeconds())).slice(-2)
 };

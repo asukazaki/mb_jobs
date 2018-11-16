@@ -4,3 +4,4 @@
 export {default as Jobs } from './Jobs';
 export {default as JobsLink} from './JobsLink';
 export {default as Dakoku} from './Dakoku';
+// export {default as Kintai} from './Kintai';

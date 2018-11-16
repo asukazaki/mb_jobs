@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Alert,Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
+
 // export default function Jobs({id,year,month}){
 export default class Jobs extends React.Component {
     componentWillMount(){
@@ -34,7 +35,7 @@ export default class Jobs extends React.Component {
                                 <Link to={getNextMonthUrl(id,year,month)}>来月</Link>
                                 </div>
 
-                            <Table striped>
+                            <Table >
                                 <tbody>
                                 <tr>
                                     <th>日付</th>
@@ -47,10 +48,18 @@ export default class Jobs extends React.Component {
                                     <th>残業時間</th>
                                 </tr>
 
-                                {kintais.map(item => (
-                                    <tr key={`${item.date}_row`}>
+                                {kintais.map( (item,index) => (
+                                    <tr key={`${item.date}_row`} className={(item.jobStateCode==0 && (!item.startTime)) ? "table-danger" : ""}>
                                         <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
-                                        <td key={`${item.date}_start`}> {item.startTime}</td>
+                                        {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
+                                        <td key={`${item.date}_start`}> 
+                                            <input type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime} className={(item.startTimeValidate) ? "form-control" : "form-control is-invalid"}
+                                                onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                                onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)}  required />
+                                                <div className="invalid-feedback">
+                                                    {item.startTimeMessages}
+                                                </div>
+                                        </td>
                                         <td key={`${item.date}_end`}> {item.endTime}</td>
                                         <td key={`${item.date}_restStart`}> {item.restStartTime}</td>
                                         <td key={`${item.date}_restEnd`}> {item.restEndTime}</td>
@@ -58,6 +67,9 @@ export default class Jobs extends React.Component {
                                         <td key={`${item.date}_restPerDay`}> {item.restPerDay}</td>
                                         <td key={`${item.date}_overTimePerDay`}> {item.overTimePerDay}</td>
                                     </tr>
+                                    // <Kintai key={`${index}_k`} index={`${index}`} date={`${item.date}`} dayOfWeek={`${item.dayOfWeek}`} startTime={`${item.startTime}`} entTime={`${item.entTime}`}
+                                    //     restStartTime={`${item.restStartTime}`} restEndTime={`${item.restEndTime}`} workPerDay={`${item.workPerDay}`}
+                                    //     restPerDay={`${item.restPerDay}`} overTimePerDay={`${item.overTimePerDay}`} jobStateCode={`${item.jobStateCode}`}/>
                                 ))}
                                 </tbody>
                             </Table>

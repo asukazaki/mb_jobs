@@ -10,7 +10,7 @@ const initialState = {
     messages : [],
     hh : undefined,
     mm : undefined,
-    sss : undefined,
+    ss : undefined,
 };
 
 export default (state = initialState, action) => {
@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
                   time :action.payload.time,
                   messages:state.messages.concat([action.payload.time + '打刻しました'])
               };
-        
+
         case 'GET_HHMMSS':
         const dt = action.payload.date;
         const hour = ("00" + String(dt.getHours())).slice(-2);
