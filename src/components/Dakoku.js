@@ -10,11 +10,11 @@ export default class Dakoku extends React.Component {
     return (
         <div className="application">
         <aside className="side-area">
-        
+
             <div className="date-wrapper">
                 <div className="date">2018/11/13(火)</div>
 
-                <div className="time">08:48 {messages.length}</div>
+                <div className="time">08:48</div>
                 <button className="dakoku-edit">打刻修正</button>
                 <ul>
                     {messages.map((m,index) => (
