@@ -12,19 +12,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="category-title">
-          <ul>
-            <li>
-              <Link to="/dakoku">打刻画面へ</Link>
-            </li>
 
-            {/* idと現在の日付を受け取るものに差し替え */}
-            <li>
-              <JobsLink />
-            </li>
-          </ul>
+        <div className="category-title">
+          {/* idと現在の日付を受け取るものに差し替え */}
+          <JobsLink />
         </div>
-        <Route path="/dakoku" component={Dakoku} />
+
+        <Route
+          path="/dakoku/:id"
+          render={({ match }) => <Dakoku id={match.params.id} />}
+        />
         <Route
           path="/jobs/:id/:year/:month"
           render={({ match }) => (
