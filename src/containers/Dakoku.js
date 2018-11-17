@@ -3,7 +3,7 @@ import Dakoku from '../components/Dakoku';
 import * as actions from '../actions/Dakoku';
 
 const mapStateToProps = (state, ownProps) => ({
-    id: state.Dakoku.id,
+    id: ownProps.id,
     messages: state.Dakoku.messages,
     hh:state.Dakoku.hh,
     mm:state.Dakoku.mm,

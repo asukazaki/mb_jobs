@@ -91,7 +91,7 @@ Dakoku.PropTypes = {
 };
 
 Dakoku.defaultProps = {
-  id: 1,
+  id: undefined,
   messages: [],
   didSyukkin: false,
   hh: ("00" + String(new Date().getHours())).slice(-2),
