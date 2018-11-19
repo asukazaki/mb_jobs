@@ -6,8 +6,12 @@ import "../Dakoku.css";
 
 // export default function Dakoku({id,year,month,messages,postDakoku}){
 export default class Dakoku extends React.Component {
-  componentDidMount() {
+  componentWillMount(){
     this.props.startClock();
+  }
+
+  componentDidMount() {
+    // this.props.startClock();
   }
 
   render() {
