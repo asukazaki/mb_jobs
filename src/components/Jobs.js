@@ -26,9 +26,9 @@ export default class Jobs extends React.Component {
         <React.Fragment>
             <aside class="side-area">
                 <div class="change-button">
-                <button class="left arrow"><Link to={getLastMonthUrl(id,year,month)}>前月</Link></button>
+                <Link to={getLastMonthUrl(id,year,month)}><button class="left arrow"></button></Link>
                 <div>{year}/{month}</div>
-                <button class="right arrow"> <Link to={getNextMonthUrl(id,year,month)}>来月</Link></button>
+                <Link to={getNextMonthUrl(id,year,month)}><button class="right arrow"></button></Link>
                 </div>
                 <div class="name">ITI 太郎</div>
                 <div class="zangyo-summary">

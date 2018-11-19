@@ -14,10 +14,10 @@
 
 /* ボタンは画像で用意したほうがいいかも。。。*/
 .change-button {
-    display:flex;   
+    display:flex;
 }
 
-.change-button button {
+.change-button a {
     /*width: 2em;
     height: 1.5em;*/
     margin:auto; 
@@ -25,6 +25,11 @@
    /* background: #215968;
     border: none;
     border-radius: 0.2em;*/
+    text-decoration: none;
+}
+
+.change-button button {
+    border: none;
 }
 
 .arrow{
@@ -74,6 +79,9 @@
     border-right: 10px solid #fff;
 }
 
+.change-button a, .change-button button {
+    cursor : pointer;
+}
 
 .zangyo-summary {
     margin-top: 2em;
