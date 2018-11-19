@@ -12,26 +12,26 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
-        <div className="category-title">
+        <div className="application">
+        
           {/* idと現在の日付を受け取るものに差し替え */}
           <JobsLink />
-        </div>
 
-        <Route
-          path="/dakoku/:id"
-          render={({ match }) => <Dakoku id={match.params.id} />}
-        />
-        <Route
-          path="/jobs/:id/:year/:month"
-          render={({ match }) => (
-            <Jobs
-              id={match.params.id}
-              year={match.params.year}
-              month={match.params.month}
-            />
-          )}
-        />
+          <Route
+            path="/dakoku/:id"
+            render={({ match }) => <Dakoku id={match.params.id} />}
+          />
+          <Route
+            path="/jobs/:id/:year/:month"
+            render={({ match }) => (
+              <Jobs
+                id={match.params.id}
+                year={match.params.year}
+                month={match.params.month}
+              />
+            )}
+          />
+        </div>
       </div>
     );
   }

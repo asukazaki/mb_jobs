@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import {Alert,Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
+import '../css/common.css'
+
 // export default function Jobs({id,year,month}){
 export default class Jobs extends React.Component {
     componentWillMount(){
+        document.body.style.overflow = "auto";
         this.props.onMount(this.props.id,this.props.year,this.props.month);
     }
     componentWillReceiveProps(nextProps){
@@ -19,7 +22,7 @@ export default class Jobs extends React.Component {
         const {id,year,month,kintais, monthOverTime,error} = this.props;
         return(
 
-            <div>
+            <main className="content">
                 {(() => {
                     if(error){
                         return <p>エラーが発生しました</p>;
@@ -66,7 +69,7 @@ export default class Jobs extends React.Component {
                         );
                     }
                 })()}
-            </div>         
+            </main>         
         );
     }
 }
