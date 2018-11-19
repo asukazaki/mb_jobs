@@ -4,11 +4,12 @@ import {Alert,Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 import '../css/common.css'
+import '../css/kintai.css'
 
 // export default function Jobs({id,year,month}){
 export default class Jobs extends React.Component {
     componentWillMount(){
-        document.body.style.overflow = "auto";
+        //document.body.style.overflow = "auto";
         this.props.onMount(this.props.id,this.props.year,this.props.month);
     }
     componentWillReceiveProps(nextProps){
@@ -22,6 +23,26 @@ export default class Jobs extends React.Component {
         const {id,year,month,kintais, monthOverTime,error} = this.props;
         return(
 
+        <React.Fragment>
+            <aside class="side-area">
+                <div class="change-button">
+                <button class="left arrow"><Link to={getLastMonthUrl(id,year,month)}>前月</Link></button>
+                <div>{year}/{month}</div>
+                <button class="right arrow"> <Link to={getNextMonthUrl(id,year,month)}>来月</Link></button>
+                </div>
+                <div class="name">ITI 太郎</div>
+                <div class="zangyo-summary">
+                    <span>残業時間合計</span>
+                    <table class="zangyo-summary-table">
+                    <tbody><tr><th>今月</th></tr>
+                <tr><td>--:--</td></tr>
+                <tr><th>3か月</th></tr>
+                <tr><td>--:--</td></tr>
+                <tr><th>年間</th></tr>
+                <tr><td>--:--</td></tr>
+                </tbody></table>
+                </div>
+            </aside>
             <main className="content">
                 {(() => {
                     if(error){
@@ -31,45 +52,42 @@ export default class Jobs extends React.Component {
                     } else {
                         return (
                             <div>
-                                <div>
-                                <Link to={getLastMonthUrl(id,year,month)}>前月</Link>
-                                {year}/{month}
-                                <Link to={getNextMonthUrl(id,year,month)}>来月</Link>
-                                </div>
-
-                            <Table striped>
-                                <tbody>
-                                <tr>
-                                    <th>日付</th>
-                                    <th>出勤</th>
-                                    <th>退勤</th>
-                                    <th>休憩開始</th>
-                                    <th>休憩終了</th>
-                                    <th>総労働時間</th>
-                                    <th>休憩時間</th>
-                                    <th>残業時間</th>
-                                </tr>
+                            <table class="kintai-main-table">
+                            <thead class="kintai-main-table-header">
+                            <tr class="kintai-main-table-header__row">
+                            <th class="kintai-main-table-header__cell sticky">日付</th>
+                            <th class="kintai-main-table-header__cell sticky">出勤</th>
+                            <th class="kintai-main-table-header__cell sticky">退勤</th>
+                            <th class="kintai-main-table-header__cell sticky">休憩開始</th>
+                            <th class="kintai-main-table-header__cell sticky">休憩終了</th>
+                            <th class="kintai-main-table-header__cell sticky">総労働時間</th>
+                            <th class="kintai-main-table-header__cell sticky">休憩時間</th>
+                            <th class="kintai-main-table-header__cell sticky">残業時間</th>
+                            </tr>
+                            </thead>
+                                <tbody class="kintai-month-table-body">
 
                                 {kintais.map(item => (
-                                    <tr key={`${item.date}_row`}>
-                                        <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
-                                        <td key={`${item.date}_start`}> {item.startTime}</td>
-                                        <td key={`${item.date}_end`}> {item.endTime}</td>
-                                        <td key={`${item.date}_restStart`}> {item.restStartTime}</td>
-                                        <td key={`${item.date}_restEnd`}> {item.restEndTime}</td>
-                                        <td key={`${item.date}_workPerDay`}>{item.workPerDay} </td>
-                                        <td key={`${item.date}_restPerDay`}> {item.restPerDay}</td>
-                                        <td key={`${item.date}_overTimePerDay`}> {item.overTimePerDay}</td>
+                                    <tr key={`${item.date}_row`} class="kintai-month-table-body__row">
+                                        <td key={`${item.date}_date`} class="kintai-month-table-body__cell"> {item.date}({item.dayOfWeek})</td>
+                                        <td key={`${item.date}_start`} class="kintai-month-table-body__cell"> {item.startTime}</td>
+                                        <td key={`${item.date}_end`} class="kintai-month-table-body__cell"> {item.endTime}</td>
+                                        <td key={`${item.date}_restStart`} class="kintai-month-table-body__cell"> {item.restStartTime}</td>
+                                        <td key={`${item.date}_restEnd`} class="kintai-month-table-body__cell"> {item.restEndTime}</td>
+                                        <td key={`${item.date}_workPerDay`} class="kintai-month-table-body__cell">{item.workPerDay} </td>
+                                        <td key={`${item.date}_restPerDay`} class="kintai-month-table-body__cell"> {item.restPerDay}</td>
+                                        <td key={`${item.date}_overTimePerDay`} class="kintai-month-table-body__cell"> {item.overTimePerDay}</td>
                                     </tr>
                                 ))}
                                 </tbody>
-                            </Table>
+                            </table>
                             <p>月の残業時間合計：　{monthOverTime} h </p>
                             </div>
                         );
                     }
                 })()}
-            </main>         
+            </main>
+        </React.Fragment>
         );
     }
 }

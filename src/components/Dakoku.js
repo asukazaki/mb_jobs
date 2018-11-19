@@ -9,7 +9,7 @@ export default class Dakoku extends React.Component {
       const {id,messages,postDakoku} = this.props;
     return (
         <div className="application">
-        <aside className="side-area">
+        <aside className="side-area time">
 
             <div className="date-wrapper">
                 <div className="date">2018/11/13(火)</div>
@@ -24,7 +24,7 @@ export default class Dakoku extends React.Component {
             </div>
         </aside>
 
-        <main className="content">
+        <main className="content time">
             <div className="dakoku-buttun-wrapper">
                 <ul>
                     <li className="shutaikin">

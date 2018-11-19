@@ -1,12 +1,12 @@
 
-.content {
+.content.time {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.side-area{
+.side-area.time{
     width: 30%;
     height: 100%;
     box-sizing: border-box;
