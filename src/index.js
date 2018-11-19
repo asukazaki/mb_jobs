@@ -9,8 +9,8 @@ import createBrowserHIstory from 'history/createBrowserHistory';
 import './index.css';
 import App from './App';
 import createStore from './createStore';
-import '../node_modules/react-bootstrap/dist/react-bootstrap';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+/*import '../node_modules/react-bootstrap/dist/react-bootstrap';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';*/
 
 // historyのインスタンスを生成
 const history = createBrowserHIstory();
