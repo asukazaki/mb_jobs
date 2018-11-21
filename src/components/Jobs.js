@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import {Link} from 'react-router-dom';
 
-interface InputProps {
+interface  ValidateProps {
     isInvalid?: boolean
 }
+
 const InputArea = styled.input`
-  border-color: ${(props: InputProps) => props.isInvalid ? props.isInvalid : '#dc3545'};
+  border-color: ${(props: ValidateProps) => props.isInvalid ? null : '#dc3545'};
 `;
 
 const ValidateComment = styled.div`
@@ -18,6 +19,15 @@ const ValidateComment = styled.div`
     color: #dc3545;
 }
 `
+
+const TrDanger = styled.tr`
+    background-color: ${(props:  ValidateProps) => props.isInvalid ? null : '#f5c6cb'};
+`
+
+/*
+* .table-danger, .table-danger>td, .table-danger>th {
+    background-color: #f5c6cb;
+}*/
 
 // export default function Jobs({id,year,month}){
 
@@ -65,13 +75,13 @@ export default class Jobs extends React.Component {
                                 </tr>
 
                                 {kintais.map( (item,index) => (
-                                    <tr key={`${item.date}_row`} className={(item.jobStateCode==0 && (!item.startTime)) ? "table-danger" : ""}>
+                                    <TrDanger isInvalid={(item.jobStateCode==0 && (!item.startTime))} key={`${item.date}_row`}>
                                         <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
                                         {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
                                         <td key={`${item.date}_start`}> 
-                                            <InputArea isInvalid={(item.startTimeValidate) ? true : false} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
-                                                onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
-                                                onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)}  required />
+                                            <InputArea isInvalid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
+                                                       onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                                       onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
                                                 <ValidateComment>
                                                     {item.startTimeMessages}
                                                 </ValidateComment>
@@ -82,7 +92,7 @@ export default class Jobs extends React.Component {
                                         <td key={`${item.date}_workPerDay`}>{item.workPerDay} </td>
                                         <td key={`${item.date}_restPerDay`}> {item.restPerDay}</td>
                                         <td key={`${item.date}_overTimePerDay`}> {item.overTimePerDay}</td>
-                                    </tr>
+                                    </TrDanger>
                                     // <Kintai key={`${index}_k`} index={`${index}`} date={`${item.date}`} dayOfWeek={`${item.dayOfWeek}`} startTime={`${item.startTime}`} entTime={`${item.entTime}`}
                                     //     restStartTime={`${item.restStartTime}`} restEndTime={`${item.restEndTime}`} workPerDay={`${item.workPerDay}`}
                                     //     restPerDay={`${item.restPerDay}`} overTimePerDay={`${item.overTimePerDay}`} jobStateCode={`${item.jobStateCode}`}/>
