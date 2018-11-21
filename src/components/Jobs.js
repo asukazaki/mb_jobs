@@ -11,7 +11,7 @@ const InputArea = styled.input`
   border-color: ${(props: ValidateProps) => props.isInvalid ? 'unset' : '#dc3545'};
 `;
 
-const TrDanger = styled.tr`
+const Tr = styled.tr`
     background-color: ${(props:  ValidateProps) => props.isInvalid ? 'transparent' : '#f5c6cb'};
 `
 
@@ -69,7 +69,7 @@ export default class Jobs extends React.Component {
                                 </tr>
 
                                 {kintais.map( (item,index) => (
-                                    <TrDanger isInvalid={!(item.jobStateCode==0 && !item.startTime)} key={`${item.date}_row`}>
+                                    <Tr isInvalid={!(item.jobStateCode==0 && !item.startTime)} key={`${item.date}_row`}>
                                         <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
                                         {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
                                         <td key={`${item.date}_start`}> 
@@ -86,7 +86,7 @@ export default class Jobs extends React.Component {
                                         <td key={`${item.date}_workPerDay`}>{item.workPerDay} </td>
                                         <td key={`${item.date}_restPerDay`}> {item.restPerDay}</td>
                                         <td key={`${item.date}_overTimePerDay`}> {item.overTimePerDay}</td>
-                                    </TrDanger>
+                                    </Tr>
                                     // <Kintai key={`${index}_k`} index={`${index}`} date={`${item.date}`} dayOfWeek={`${item.dayOfWeek}`} startTime={`${item.startTime}`} entTime={`${item.entTime}`}
                                     //     restStartTime={`${item.restStartTime}`} restEndTime={`${item.restEndTime}`} workPerDay={`${item.workPerDay}`}
                                     //     restPerDay={`${item.restPerDay}`} overTimePerDay={`${item.overTimePerDay}`} jobStateCode={`${item.jobStateCode}`}/>
