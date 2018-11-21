@@ -6,13 +6,19 @@ import styled from "styled-components";
 import '../css/common.css'
 import '../css/kintai.css'
 
-interface InputProps {
-    isInvalid?: boolean
+interface  ValidateProps {
+    isValid?: boolean
 }
+
 const InputArea = styled.input`
-  border-color: ${(props: InputProps) => props.isInvalid ? props.isInvalid : '#dc3545'};
+  border-color: ${(props: ValidateProps) => props.isValid ? 'unset' : '#dc3545'};
 `;
- const ValidateComment = styled.div`
+
+const Tr = styled.tr`
+    background-color: ${(props:  ValidateProps) => props.isValid ? 'transparent' : '#f5c6cb'};
+`
+
+const ValidateComment = styled.div`
     /* display: none; */
     width: 100%;
     margin-top: .25rem;
@@ -82,11 +88,11 @@ export default class Jobs extends React.Component {
                                 <tbody class="kintai-month-table-body">
 
                                 {kintais.map((item,index) => (
-                                    <tr key={`${item.date}_row`} className={(item.jobStateCode==0 && (!item.startTime)) ? "table-danger" : ""}>
+                                    <Tr isValid={(item.jobStateCode==0 && (!item.startTime)) ? "table-danger" : ""} key={`${item.date}_row`}>
                                     <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
                                     {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
-                                    <td key={`${item.date}_start`}> 
-                                        <InputArea isInvalid={(item.startTimeValidate) ? true : false} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
+                                    <td key={`${item.date}_start`}>
+                                        <InputArea isValid={(item.startTimeValidate) ? true : false} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
                                             onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
                                             onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)}  required />
                                             <ValidateComment>
@@ -99,7 +105,7 @@ export default class Jobs extends React.Component {
                                         <td key={`${item.date}_workPerDay`} class="kintai-month-table-body__cell">{item.workPerDay} </td>
                                         <td key={`${item.date}_restPerDay`} class="kintai-month-table-body__cell"> {item.restPerDay}</td>
                                         <td key={`${item.date}_overTimePerDay`} class="kintai-month-table-body__cell"> {item.overTimePerDay}</td>
-                                    </tr>
+                                    </Tr>
                                 ))}
                                 </tbody>
                             </table>
