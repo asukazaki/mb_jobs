@@ -1,12 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Alert,Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import styled from "styled-components";
 
 import '../css/common.css'
 import '../css/kintai.css'
 
-// export default function Jobs({id,year,month}){
+interface InputProps {
+    isInvalid?: boolean
+}
+const InputArea = styled.input`
+  border-color: ${(props: InputProps) => props.isInvalid ? props.isInvalid : '#dc3545'};
+`;
+ const ValidateComment = styled.div`
+    /* display: none; */
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+`
+
 export default class Jobs extends React.Component {
     componentWillMount(){
         //document.body.style.overflow = "auto";
@@ -67,10 +81,18 @@ export default class Jobs extends React.Component {
                             </thead>
                                 <tbody class="kintai-month-table-body">
 
-                                {kintais.map(item => (
-                                    <tr key={`${item.date}_row`} class="kintai-month-table-body__row">
-                                        <td key={`${item.date}_date`} class="kintai-month-table-body__cell"> {item.date}({item.dayOfWeek})</td>
-                                        <td key={`${item.date}_start`} class="kintai-month-table-body__cell"> {item.startTime}</td>
+                                {kintais.map((item,index) => (
+                                    <tr key={`${item.date}_row`} className={(item.jobStateCode==0 && (!item.startTime)) ? "table-danger" : ""}>
+                                    <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
+                                    {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
+                                    <td key={`${item.date}_start`}> 
+                                        <InputArea isInvalid={(item.startTimeValidate) ? true : false} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
+                                            onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                            onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)}  required />
+                                            <ValidateComment>
+                                                {item.startTimeMessages}
+                                            </ValidateComment>
+                                    </td>
                                         <td key={`${item.date}_end`} class="kintai-month-table-body__cell"> {item.endTime}</td>
                                         <td key={`${item.date}_restStart`} class="kintai-month-table-body__cell"> {item.restStartTime}</td>
                                         <td key={`${item.date}_restEnd`} class="kintai-month-table-body__cell"> {item.restEndTime}</td>
