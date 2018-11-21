@@ -88,13 +88,13 @@ export default class Jobs extends React.Component {
                                 <tbody class="kintai-month-table-body">
 
                                 {kintais.map((item,index) => (
-                                    <Tr isValid={(item.jobStateCode==0 && (!item.startTime)) ? "table-danger" : ""} key={`${item.date}_row`}>
+                                    <Tr isValid={!(item.jobStateCode==0 && (!item.startTime)) ? "table-danger" : ""} key={`${item.date}_row`}>
                                     <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
                                     {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
                                     <td key={`${item.date}_start`}>
-                                        <InputArea isValid={(item.startTimeValidate) ? true : false} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
-                                            onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
-                                            onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)}  required />
+                                        <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
+                                                   onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                                   onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
                                             <ValidateComment>
                                                 {item.startTimeMessages}
                                             </ValidateComment>
