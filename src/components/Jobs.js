@@ -4,15 +4,15 @@ import styled from "styled-components";
 import {Link} from 'react-router-dom';
 
 interface  ValidateProps {
-    isInvalid?: boolean
+    isValid?: boolean
 }
 
 const InputArea = styled.input`
-  border-color: ${(props: ValidateProps) => props.isInvalid ? 'unset' : '#dc3545'};
+  border-color: ${(props: ValidateProps) => props.isValid ? 'unset' : '#dc3545'};
 `;
 
 const Tr = styled.tr`
-    background-color: ${(props:  ValidateProps) => props.isInvalid ? 'transparent' : '#f5c6cb'};
+    background-color: ${(props:  ValidateProps) => props.isValid ? 'transparent' : '#f5c6cb'};
 `
 
 const ValidateComment = styled.div`
@@ -69,11 +69,11 @@ export default class Jobs extends React.Component {
                                 </tr>
 
                                 {kintais.map( (item,index) => (
-                                    <Tr isInvalid={!(item.jobStateCode==0 && !item.startTime)} key={`${item.date}_row`}>
+                                    <Tr isValid={!(item.jobStateCode==0 && !item.startTime)} key={`${item.date}_row`}>
                                         <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
                                         {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
                                         <td key={`${item.date}_start`}> 
-                                            <InputArea isInvalid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
+                                            <InputArea isValid={item.startTimeValidate} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
                                                        onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
                                                        onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
                                                 <ValidateComment>
