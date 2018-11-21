@@ -8,8 +8,12 @@ interface  ValidateProps {
 }
 
 const InputArea = styled.input`
-  border-color: ${(props: ValidateProps) => props.isInvalid ? null : '#dc3545'};
+  border-color: ${(props: ValidateProps) => props.isInvalid ? 'unset' : '#dc3545'};
 `;
+
+const TrDanger = styled.tr`
+    background-color: ${(props:  ValidateProps) => props.isInvalid ? 'transparent' : '#f5c6cb'};
+`
 
 const ValidateComment = styled.div`
     /* display: none; */
@@ -20,16 +24,6 @@ const ValidateComment = styled.div`
 }
 `
 
-const TrDanger = styled.tr`
-    background-color: ${(props:  ValidateProps) => props.isInvalid ? null : '#f5c6cb'};
-`
-
-/*
-* .table-danger, .table-danger>td, .table-danger>th {
-    background-color: #f5c6cb;
-}*/
-
-// export default function Jobs({id,year,month}){
 
 export default class Jobs extends React.Component {
     componentWillMount(){
@@ -75,7 +69,7 @@ export default class Jobs extends React.Component {
                                 </tr>
 
                                 {kintais.map( (item,index) => (
-                                    <TrDanger isInvalid={(item.jobStateCode==0 && (!item.startTime))} key={`${item.date}_row`}>
+                                    <TrDanger isInvalid={!(item.jobStateCode==0 && !item.startTime)} key={`${item.date}_row`}>
                                         <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
                                         {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
                                         <td key={`${item.date}_start`}> 
