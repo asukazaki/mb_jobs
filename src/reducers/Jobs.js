@@ -17,6 +17,8 @@ const getKintaiInfo = response => {
             jobStateCode : item.jobStateCode,
             startTimeValidate : true,
             startTimeMessages : [],
+            endTimeValidate : true,
+            endTimeMessages : [],
             // TODO: 検討
             initialStartTime:item.startTime
         })
@@ -72,38 +74,14 @@ export default (state = initialState, action) => {
             var onBlurCheck = true;
             var message = "";
 
-            switch (action.payload.name){
-                case 'startTime' :
-                    if(action.payload.jobStateCode == 0){
-                        if(action.payload.value){
-                            if(!action.payload.value.match("^[0-9]{2}:[0-9]{2}:[0-9]{2}$")){
-                                isValid = false;
-                                message = "hh:MM:ss で入力してください"
-                                if(action.payload.type === 'blur'){
-                                    onBlurCheck = false;
-                                }
-                            }
-                        }else{
-                            isValid = false;
-                            message = "必須です"
-                            onBlurCheck = false;
-                        }
-                    } else {
-                        if(!action.payload.value.match("^[0-9]{2}:[0-9]{2}:[0-9]{2}$")){
-                            isValid = false;
-                            message = "hh:MM:ss で入力してください"
-                            if(action.payload.type === 'blur'){
-                                onBlurCheck = false;
-                            }
-                        }
+            if(action.payload.value){
+                if(!action.payload.value.match("^([01]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$")){
+                    isValid = false;
+                    message = "時刻を正しく入力してください（hh:MM:ss）";
+                    if(action.payload.type === 'blur'){
+                        onBlurCheck = false;
                     }
-                case 'endTime' :
-                    break;
-                case 'restStartTime' :
-                    break;
-                case 'restEndTime' :
-                    break;
-                default :
+                }
             }
             return {
                 ...state,

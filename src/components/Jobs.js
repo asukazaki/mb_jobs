@@ -99,7 +99,15 @@ export default class Jobs extends React.Component {
                                                 {item.startTimeMessages}
                                             </ValidateComment>
                                     </td>
-                                        <td key={`${item.date}_end`} class="kintai-month-table-body__cell"> {item.endTime}</td>
+                                    <td key={`${item.date}_end`}>
+                                        <InputArea isValid={(item.endTimeValidate)} type="text" disabled={(item.endTime == "-") ? "disabled" : ""} name="endTime" value={item.endTime}
+                                                   onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                                   onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)}  />
+                                            <ValidateComment>
+                                                {item.endTimeMessages}
+                                            </ValidateComment>
+                                    </td>
+                                        {/* <td key={`${item.date}_end`} class="kintai-month-table-body__cell"> {item.endTime}</td> */}
                                         <td key={`${item.date}_restStart`} class="kintai-month-table-body__cell"> {item.restStartTime}</td>
                                         <td key={`${item.date}_restEnd`} class="kintai-month-table-body__cell"> {item.restEndTime}</td>
                                         <td key={`${item.date}_workPerDay`} class="kintai-month-table-body__cell">{item.workPerDay} </td>
