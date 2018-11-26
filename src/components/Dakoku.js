@@ -5,17 +5,20 @@ import "../css/common.css";
 import "../css/dakoku.css";
 
 export default class Dakoku extends React.Component {
+  componentWillMount(){
+    this.props.startClock();
+  }
+
   render() {
-      const {id,messages,postDakoku} = this.props;
+      const {id,year,month,day,hh,mm,ss,messages,postDakoku} = this.props;
     return (
         <div className="application">
         <aside className="side-area time">
 
             <div className="date-wrapper">
-                <div className="date">2018/11/13(火)</div>
+                <div className="date">{year}/{month}/{day}</div>
 
-                <div className="time">08:48</div>
-                <button className="dakoku-edit">打刻修正</button>
+                <div className="time">{hh}:{mm}:{ss}</div>
                 <ul>
                     {messages.map((m,index) => (
                         <li key={index}>{m}</li>
@@ -51,4 +54,10 @@ Dakoku.PropTypes = {
 Dakoku.defaultProps = {
   id : 1,
   messgaes : [],
+  year: new Date().getFullYear(),
+  month: `00${new Date().getMonth()+1}`.slice(-2),
+  day : ("00" + String(new Date().getDate())).slice(-2),
+  hh: ("00" + String(new Date().getHours())).slice(-2),
+  mm: ("00" + String(new Date().getMinutes())).slice(-2),
+  ss: ("00" + String(new Date().getSeconds())).slice(-2)
 };

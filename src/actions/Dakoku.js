@@ -7,6 +7,11 @@ const receiveDakokuResponse = (time, dakokuType, error) => ({
   payload: { time, dakokuType, error }
 });
 
+const getHhMmSs = date => ({
+  type: "GET_HHMMSS",
+  payload: { date }
+});
+
 export const postDakokuAPI = (id, dakokuType) => {
   return dispatch => {
     const [year, month, day, time] = getNowDate();
@@ -84,4 +89,8 @@ const makeBodyJson = (dakokuType, time) => {
           dakokuType: "NONE"
         };
     }
+  };
+
+  export const startClock = () => dispatch => {
+    setInterval(() => dispatch(getHhMmSs(new Date())), 1000);
   };
