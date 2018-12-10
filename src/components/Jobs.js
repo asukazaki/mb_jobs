@@ -88,8 +88,8 @@ export default class Jobs extends React.Component {
                                 <tbody class="kintai-month-table-body">
 
                                 {kintais.map((item,index) => (
-                                    <Tr isValid={!(item.jobStateCode==0 && (!item.startTime)) ? "table-danger" : ""} key={`${item.date}_row`}>
-                                    <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
+                                    <Tr isValid={!item.dakokuError ? "table-danger" : ""} key={`${item.date}_row`}>
+                                    <td key={`${item.date}_date`}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}{item.firstErrorMessage}</td>
                                     {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
                                     <td key={`${item.date}_start`}>
                                         <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
@@ -102,7 +102,7 @@ export default class Jobs extends React.Component {
                                     <td key={`${item.date}_end`}>
                                         <InputArea isValid={(item.endTimeValidate)} type="text" disabled={(item.endTime == "-") ? "disabled" : ""} name="endTime" value={item.endTime}
                                                    onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
-                                                   onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)}  />
+                                                   onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
                                             <ValidateComment>
                                                 {item.endTimeMessages}
                                             </ValidateComment>

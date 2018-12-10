@@ -7,6 +7,7 @@ const getKintaiInfo = response => {
             id:item.id,
             date:item.date,
             dayOfWeek:item.dayOfWeek,
+            dayOfWeekDisplayName : item.dayOfWeekDisplayName,
             startTime:item.startTime,
             endTime:item.endTime,
             restStartTime:item.restStartTime,
@@ -15,6 +16,13 @@ const getKintaiInfo = response => {
             restPerDay:item.restPerDay,
             overTimePerDay:item.overTimePerDay,
             jobStateCode : item.jobStateCode,
+            holiday: item.holiday,
+            holydayName: item.holydayName,
+            dakokuError: item.dakokuError,
+            firstErrorMessage: (item.errorMessages) ? item.errorMessages[0]:undefined,
+            futureDate: false,
+
+            // validation
             startTimeValidate : true,
             startTimeMessages : [],
             endTimeValidate : true,
@@ -75,9 +83,9 @@ export default (state = initialState, action) => {
             var message = "";
 
             if(action.payload.value){
-                if(!action.payload.value.match("^([01]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$")){
+                if(!action.payload.value.match("^([01]?[0-9]|2[0-3]):([0-5][0-9])$")){
                     isValid = false;
-                    message = "時刻を正しく入力してください（hh:MM:ss）";
+                    message = "時刻を正しく入力してください（hh:MM）";
                     if(action.payload.type === 'blur'){
                         onBlurCheck = false;
                     }
