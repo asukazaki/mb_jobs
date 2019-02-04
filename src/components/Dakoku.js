@@ -18,7 +18,7 @@ export default class Dakoku extends React.Component {
             <div className="date-wrapper">
                 <div className="date">{year}/{month}/{day}</div>
 
-                <div className="time">{hh}:{mm}:{ss}</div>
+                <div className="time">{hh}:{mm}<span class="sec">:{ss}</span></div>
                 <ul>
                     {messages.map((m,index) => (
                         <li key={index}>{m}</li>

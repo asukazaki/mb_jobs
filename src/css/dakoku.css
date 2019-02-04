@@ -1,24 +1,30 @@
 
 .content.time {
     height: 100%;
+    width:calc(100vw - 600px);
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
+    padding-left: 2em;
     align-items: center;
+    overflow: inherit;
+}
+
+.sec {
+    font-size: 0.5em;
 }
 
 .side-area.time{
-    width: 30%;
+    width: 450px;
     height: 100%;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left:2em;
 }
 
 .date-wrapper {
     margin-left: 5%;
-    width: 90%;
+    width: 100%;
     height: 50%;
     text-align: left;
 }
@@ -31,6 +37,10 @@
 .date-wrapper .time {
     width: 100%;
     font-size: 7em;
+}
+
+.dakoku-buttun-wrapper ul {
+    padding-inline-start: 0;/*user agent stylesheet 打ち消し*/
 }
 
 .dakoku-buttun-wrapper li {
