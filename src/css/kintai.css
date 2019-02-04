@@ -119,9 +119,9 @@
 }
 
 /*偶数(even)列に背景色　nth-child(n)--->兄弟要素のnごとになにかする*/
-.kintai-month-table-body__cell:nth-child(even) { 
+/* .kintai-month-table-body__cell:nth-child(even) { 
     background: #d1d6d6;
-}
+} */
 
 .saturday {
     color:rgb(59, 116, 201);

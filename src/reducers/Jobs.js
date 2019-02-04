@@ -28,7 +28,8 @@ const getKintaiInfo = response => {
             endTimeValidate : true,
             endTimeMessages : [],
             // TODO: 検討
-            initialStartTime:item.startTime
+            initialstartTime:item.startTime,
+            initialendTime : item.endTime
         })
     }
     return kintais;
@@ -82,7 +83,8 @@ export default (state = initialState, action) => {
             var onBlurCheck = true;
             var message = "";
 
-            if(action.payload.value){
+            const kintai = action.payload.kintais[action.payload.index];
+            if(kintai["initial"+action.payload.name] || action.payload.value){
                 if(!action.payload.value.match("^([01]?[0-9]|2[0-3]):([0-5][0-9])$")){
                     isValid = false;
                     message = "時刻を正しく入力してください（hh:MM）";

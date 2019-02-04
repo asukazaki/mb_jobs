@@ -78,8 +78,8 @@ export default class Jobs extends React.Component {
                             <th class="kintai-main-table-header__cell sticky">日付</th>
                             <th class="kintai-main-table-header__cell sticky">出勤</th>
                             <th class="kintai-main-table-header__cell sticky">退勤</th>
-                            <th class="kintai-main-table-header__cell sticky">休憩開始</th>
-                            <th class="kintai-main-table-header__cell sticky">休憩終了</th>
+                            {/* <th class="kintai-main-table-header__cell sticky">休憩開始</th> */}
+                            {/* <th class="kintai-main-table-header__cell sticky">休憩終了</th> */}
                             <th class="kintai-main-table-header__cell sticky">総労働時間</th>
                             <th class="kintai-main-table-header__cell sticky">休憩時間</th>
                             <th class="kintai-main-table-header__cell sticky">残業時間</th>
@@ -88,8 +88,8 @@ export default class Jobs extends React.Component {
                                 <tbody class="kintai-month-table-body">
 
                                 {kintais.map((item,index) => (
-                                    <Tr isValid={!item.dakokuError ? "table-danger" : ""} key={`${item.date}_row`}>
-                                    <td key={`${item.date}_date`}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}{item.firstErrorMessage}</td>
+                                    <Tr isValid={!item.dakokuError} key={`${item.date}_row`}>
+                                    <td key={`${item.date}_date`} class={getDayOfWeek(item)}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}{item.firstErrorMessage}</td>
                                     {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
                                     <td key={`${item.date}_start`}>
                                         <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
@@ -108,8 +108,8 @@ export default class Jobs extends React.Component {
                                             </ValidateComment>
                                     </td>
                                         {/* <td key={`${item.date}_end`} class="kintai-month-table-body__cell"> {item.endTime}</td> */}
-                                        <td key={`${item.date}_restStart`} class="kintai-month-table-body__cell"> {item.restStartTime}</td>
-                                        <td key={`${item.date}_restEnd`} class="kintai-month-table-body__cell"> {item.restEndTime}</td>
+                                        {/* <td key={`${item.date}_restStart`} class="kintai-month-table-body__cell"> {item.restStartTime}</td> */}
+                                        {/* <td key={`${item.date}_restEnd`} class="kintai-month-table-body__cell"> {item.restEndTime}</td> */}
                                         <td key={`${item.date}_workPerDay`} class="kintai-month-table-body__cell">{item.workPerDay} </td>
                                         <td key={`${item.date}_restPerDay`} class="kintai-month-table-body__cell"> {item.restPerDay}</td>
                                         <td key={`${item.date}_overTimePerDay`} class="kintai-month-table-body__cell"> {item.overTimePerDay}</td>
@@ -175,3 +175,12 @@ const getNextMonthUrl = (id,year,month) => {
     return `/jobs/${id}/${dt.getFullYear()}/${nextMonth}`
 }
 
+const getDayOfWeek = (item)=> {
+    if(item.holiday){
+        return "holiday"
+    }else if(item.dayOfWeek === 6){
+        return "saturday"
+    } else if(item.dayOfWeek == 7){
+        return "sunday"
+    }
+}
