@@ -1,11 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Alert,Table} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import styled from "styled-components";
 
-// export default function Jobs({id,year,month}){
+import '../css/common.css'
+import '../css/kintai.css'
+
+interface  ValidateProps {
+    isValid?: boolean
+}
+
+const InputArea = styled.input`
+  border-color: ${(props: ValidateProps) => props.isValid ? 'unset' : '#dc3545'};
+`;
+
+const Tr = styled.tr`
+    background-color: ${(props:  ValidateProps) => props.isValid ? 'transparent' : '#f5c6cb'};
+`
+
+const ValidateComment = styled.div`
+    /* display: none; */
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+`
+
 export default class Jobs extends React.Component {
     componentWillMount(){
+        //document.body.style.overflow = "auto";
         this.props.onMount(this.props.id,this.props.year,this.props.month);
     }
     componentWillReceiveProps(nextProps){
@@ -19,7 +43,27 @@ export default class Jobs extends React.Component {
         const {id,year,month,kintais, monthOverTime,error} = this.props;
         return(
 
-            <div>
+        <React.Fragment>
+            <aside class="side-area">
+                <div class="change-button">
+                <Link to={getLastMonthUrl(id,year,month)}><button class="left arrow"></button></Link>
+                <div>{year}/{month}</div>
+                <Link to={getNextMonthUrl(id,year,month)}><button class="right arrow"></button></Link>
+                </div>
+                <div class="name">ITI 太郎</div>
+                <div class="zangyo-summary">
+                    <span>残業時間合計</span>
+                    <table class="zangyo-summary-table">
+                    <tbody><tr><th>今月</th></tr>
+                <tr><td>--:--</td></tr>
+                <tr><th>3か月</th></tr>
+                <tr><td>--:--</td></tr>
+                <tr><th>年間</th></tr>
+                <tr><td>--:--</td></tr>
+                </tbody></table>
+                </div>
+            </aside>
+            <main className="content">
                 {(() => {
                     if(error){
                         return <p>エラーが発生しました</p>;
@@ -28,45 +72,58 @@ export default class Jobs extends React.Component {
                     } else {
                         return (
                             <div>
-                                <div>
-                                <Link to={getLastMonthUrl(id,year,month)}>前月</Link>
-                                {year}/{month}
-                                <Link to={getNextMonthUrl(id,year,month)}>来月</Link>
-                                </div>
+                            <table class="kintai-main-table">
+                            <thead class="kintai-main-table-header">
+                            <tr class="kintai-main-table-header__row">
+                            <th class="kintai-main-table-header__cell sticky">日付</th>
+                            <th class="kintai-main-table-header__cell sticky">出勤</th>
+                            <th class="kintai-main-table-header__cell sticky">退勤</th>
+                            {/* <th class="kintai-main-table-header__cell sticky">休憩開始</th> */}
+                            {/* <th class="kintai-main-table-header__cell sticky">休憩終了</th> */}
+                            <th class="kintai-main-table-header__cell sticky">総労働時間</th>
+                            <th class="kintai-main-table-header__cell sticky">休憩時間</th>
+                            <th class="kintai-main-table-header__cell sticky">残業時間</th>
+                            </tr>
+                            </thead>
+                                <tbody class="kintai-month-table-body">
 
-                            <Table striped>
-                                <tbody>
-                                <tr>
-                                    <th>日付</th>
-                                    <th>出勤</th>
-                                    <th>退勤</th>
-                                    <th>休憩開始</th>
-                                    <th>休憩終了</th>
-                                    <th>総労働時間</th>
-                                    <th>休憩時間</th>
-                                    <th>残業時間</th>
-                                </tr>
-
-                                {kintais.map(item => (
-                                    <tr key={`${item.date}_row`}>
-                                        <td key={`${item.date}_date`}> {item.date}({item.dayOfWeek})</td>
-                                        <td key={`${item.date}_start`}> {item.startTime}</td>
-                                        <td key={`${item.date}_end`}> {item.endTime}</td>
-                                        <td key={`${item.date}_restStart`}> {item.restStartTime}</td>
-                                        <td key={`${item.date}_restEnd`}> {item.restEndTime}</td>
-                                        <td key={`${item.date}_workPerDay`}>{item.workPerDay} </td>
-                                        <td key={`${item.date}_restPerDay`}> {item.restPerDay}</td>
-                                        <td key={`${item.date}_overTimePerDay`}> {item.overTimePerDay}</td>
-                                    </tr>
+                                {kintais.map((item,index) => (
+                                    <Tr isValid={!item.dakokuError} key={`${item.date}_row`}>
+                                    <td key={`${item.date}_date`} class={getDayOfWeek(item)}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}{item.firstErrorMessage}</td>
+                                    {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
+                                    <td key={`${item.date}_start`}>
+                                        <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
+                                                   onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                                   onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
+                                            <ValidateComment>
+                                                {item.startTimeMessages}
+                                            </ValidateComment>
+                                    </td>
+                                    <td key={`${item.date}_end`}>
+                                        <InputArea isValid={(item.endTimeValidate)} type="text" disabled={(item.endTime == "-") ? "disabled" : ""} name="endTime" value={item.endTime}
+                                                   onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                                   onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
+                                            <ValidateComment>
+                                                {item.endTimeMessages}
+                                            </ValidateComment>
+                                    </td>
+                                        {/* <td key={`${item.date}_end`} class="kintai-month-table-body__cell"> {item.endTime}</td> */}
+                                        {/* <td key={`${item.date}_restStart`} class="kintai-month-table-body__cell"> {item.restStartTime}</td> */}
+                                        {/* <td key={`${item.date}_restEnd`} class="kintai-month-table-body__cell"> {item.restEndTime}</td> */}
+                                        <td key={`${item.date}_workPerDay`} class="kintai-month-table-body__cell">{item.workPerDay} </td>
+                                        <td key={`${item.date}_restPerDay`} class="kintai-month-table-body__cell"> {item.restPerDay}</td>
+                                        <td key={`${item.date}_overTimePerDay`} class="kintai-month-table-body__cell"> {item.overTimePerDay}</td>
+                                    </Tr>
                                 ))}
                                 </tbody>
-                            </Table>
+                            </table>
                             <p>月の残業時間合計：　{monthOverTime} h </p>
                             </div>
                         );
                     }
                 })()}
-            </div>         
+            </main>
+        </React.Fragment>
         );
     }
 }
@@ -118,3 +175,12 @@ const getNextMonthUrl = (id,year,month) => {
     return `/jobs/${id}/${dt.getFullYear()}/${nextMonth}`
 }
 
+const getDayOfWeek = (item)=> {
+    if(item.holiday){
+        return "holiday"
+    }else if(item.dayOfWeek === 6){
+        return "saturday"
+    } else if(item.dayOfWeek == 7){
+        return "sunday"
+    }
+}

@@ -1,0 +1,137 @@
+
+
+
+/*サイド（月切り替えボタンなど）エリア*/
+
+.side-area{
+    width: 15%;
+}
+
+.side-area .change-button, .side-area .name {
+    margin-top: 1.5em;
+}
+
+
+/* ボタンは画像で用意したほうがいいかも。。。*/
+.change-button {
+    display:flex;
+}
+
+.change-button a {
+    /*width: 2em;
+    height: 1.5em;*/
+    margin:auto; 
+    border: none;
+   /* background: #215968;
+    border: none;
+    border-radius: 0.2em;*/
+    text-decoration: none;
+}
+
+.change-button button {
+    border: none;
+}
+
+.arrow{
+    position: relative;
+    display: inline-block;
+    padding: 0 0 0 16px;
+    /*color: #000;*/
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.arrow::before,
+.arrow::after{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    content: "";
+    vertical-align: middle;
+}
+
+.change-button .arrow::before{
+    width:20px;
+    height: 20px;
+    -webkit-border-radius: 25%;
+    border-radius: 25%;
+    background: #7a0;
+}
+
+.change-button .arrow::after{
+    box-sizing: border-box;
+    width: 6px;
+    height: 6px;
+    border: 6px solid transparent;
+}
+
+.change-button .right::after{
+    left: 6px;
+    border-left: 10px solid #fff;
+}
+
+
+.change-button .left::after{
+    left: -2px;
+    border-right: 10px solid #fff;
+}
+
+.change-button a, .change-button button {
+    cursor : pointer;
+}
+
+.zangyo-summary {
+    margin-top: 2em;
+}
+.zangyo-summary span{
+    color:#215968;
+    font-size: 0.75em;
+}
+.zangyo-summary-table {
+    margin:auto;
+    border-collapse: collapse;
+    border: 1px solid #d1d6d6;;
+    font-size: 0.75em;
+}
+
+.zangyo-summary-table th{
+    width: 10em;
+    background:#d1d6d6;
+}
+
+
+
+/*メインエリア*/
+.kintai-main-table {
+    margin: 3em;
+    border-collapse: collapse; /*これがないとtrにborder引けない*/
+}
+
+.kintai-main-table-header__cell{
+    width: 8em;
+}
+
+.kintai-month-table-body__row {
+    border-bottom:1px #727171 solid;
+}
+
+/*偶数(even)列に背景色　nth-child(n)--->兄弟要素のnごとになにかする*/
+/* .kintai-month-table-body__cell:nth-child(even) { 
+    background: #d1d6d6;
+} */
+
+.saturday {
+    color:rgb(59, 116, 201);
+}
+
+.sunday {
+    color:rgb(201, 59, 83);
+}
+
+.holiday {
+    margin:0.25em 0.5em 0 0.5em;
+    background: rgb(238, 209, 214);
+}

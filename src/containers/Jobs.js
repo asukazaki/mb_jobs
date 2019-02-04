@@ -28,7 +28,10 @@ const mapDispatchToProps = dispatch => ({
     },
     onUpdate (id,year,month){
         dispatch(actions.fetchJobs(id,year,month))
-    }
+    },
+    execValidation (index,kintais,name,value,eventType,jobStateCode){
+        dispatch(actions.execValidate(index,kintais,name,value,eventType,jobStateCode))
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Jobs);

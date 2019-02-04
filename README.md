@@ -5,22 +5,19 @@
 ## 概要  
 
 サーバーとのアクセスとレンダリングを見るためのデモプロジェクトです。  
-無駄なコーディングやハードコートが多いかもしれません。  
+* dakoku_testブランチ　reduxの流れデモ /img/redux_shhet.pdfを参照  
+* javaEntityTestブランチ　サーバーサイドのテーブル/エンティティ変更に対応
 
 ---
 ## 構成
 
 ├── README.md  kore  
-├── package-lock.json   依存関係  
-├── package.json  
 ├── public  
-│   ├── favicon.ico  
 │   ├── index.html  
-│   └── manifest.json  
 └── src  
-    ├── App.css  
     ├── App.js  
-    ├── App.test.js  
+    ├── createStore.js  
+    ├── index.js  
     ├── actions  
     │   └── Jobs.js  
     ├── components  
@@ -28,15 +25,12 @@
     │   └── Jobs.js  
     ├── containers  
     │   └── Jobs.js  
-    ├── createStore.js  
-    ├── index.css  
-    ├── index.js  
-    ├── logo.svg  
     ├── reducers  
     │   ├── Jobs.js  
     │   ├── Route.js  
     │   └── index.js  
-    └── registerServiceWorker.js  
+
+
 
 
 ---

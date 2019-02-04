@@ -1,6 +1,4 @@
-import fetchJsonp from 'fetch-jsonp';
 import request from 'superagent';
-import qs from 'qs';
 
 const API_URL = 'http://localhost:8099/demo/jobs/'
 
@@ -21,6 +19,12 @@ const finishRequest = (id,year,month) => ({
     type: 'FINISH_REQUEST',
     payload :{id,year,month},
 });
+
+// クライアントサイドバリデーション
+const validate = (index,kintais,name,value,eventType,jobStateCode) => ({
+    type : 'VALIDATE',
+    payload :{index,kintais,name,value,eventType,jobStateCode},
+})
 
 // 一覧取得
 export const fetchJobs = (id, year, month) => {
@@ -50,7 +54,6 @@ export const fetchJobs = (id, year, month) => {
                   if(err != null)  dispatch(receiveData(id,year,month,true,null))
                   dispatch(receiveData(id,year,month,null,res));
               })
-                  
             // const responce = await fetchJsonp(API_URL + id + '/' + year + '/' + month, settings);
             // const data = await responce.json();
             // dispatch(receiveData(id,year,month,null,responce));
@@ -60,3 +63,9 @@ export const fetchJobs = (id, year, month) => {
         dispatch(finishRequest(id,year,month));
     };
 };
+
+export const execValidate = (index,kintais,name,value,eventType,jobStateCode) => {
+    return dispatch => {
+        return dispatch(validate(index,kintais,name,value,eventType,jobStateCode))
+    }
+}
