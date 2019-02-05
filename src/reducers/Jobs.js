@@ -54,7 +54,8 @@ const initialState = {
     id : undefined,
     kintais : undefined,
     monthOverTime : undefined,
-    error: false
+    error: false,
+    updateMessages: undefined
 };
 
 export default (state = initialState, action) => {
@@ -96,6 +97,15 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 kintais : setKintaisValidation(action,isValid,message,onBlurCheck),
+            }
+        case 'RECEIVE_UPDATE_DATA':
+            const updatedJobsCount = action.payload.response.body.length;
+            const updateMessages = updatedJobsCount !== undefined && updatedJobsCount > 0 ? `${updatedJobsCount} 件更新しました` : "";
+            return {
+                ...state,
+                kintais: action.payload.kintais,
+                // updateMessages : `${updatedJobsCount} 件更新しました`
+                updateMessages : updateMessages
             }
 
         default :
