@@ -62,6 +62,14 @@ export default class Jobs extends React.Component {
                 <tr><td>--:--</td></tr>
                 </tbody></table>
                 </div>
+
+                <div>
+                    <button onClick={(e) => this.props.updateJobs(id,year,month,kintais)}>打刻修正</button>
+                    <div>
+                        { error && <p>更新に失敗しました</p>}
+                        { !error && <p> {this.props.updateMessages}</p>}
+                    </div>
+                </div>
             </aside>
             <main className="content">
                 {(() => {

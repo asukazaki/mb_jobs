@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => ({
     month : state.Jobs.month!==undefined ? state.Jobs.month : ownProps.month,
     kintais:state.Jobs.kintais,
     monthOverTime:state.Jobs.monthOverTime,
-    error:state.Jobs.error
+    error:state.Jobs.error,
+    updateMessages : state.Jobs.updateMessages!==undefined ? state.Jobs.updateMessages : "",
 });
 
 /*
@@ -31,6 +32,9 @@ const mapDispatchToProps = dispatch => ({
     },
     execValidation (index,kintais,name,value,eventType,jobStateCode){
         dispatch(actions.execValidate(index,kintais,name,value,eventType,jobStateCode))
+    },
+    updateJobs(id,year,month,kintais){
+        dispatch(actions.updateJobs(id,year,month,kintais))
     },
 });
 
