@@ -2,9 +2,12 @@
     box-sizing:border-box;
 }
 
-html,body,.App,#root,.application,.side-area, .side-nav, .category-title, .category__item, .category-list, .category-list-inner, .category-list__item, .category-list-wrapper {
-    min-height:100%;
-    height:100%;
+html,body,.App,#root,.application,.side-area/*,.category-title, .category__item, .category-list, .category-list-inner, .category-list__item, .category-list-wrapper*/ {
+ /*todo あとで要調整*/
+}
+
+.category-title, .category__item {
+    height: 100vh;
 }
 
 body {
@@ -16,22 +19,6 @@ body {
   text-align: center;
 }
 
-/*header,
-footer {
-    width: 100%;
-    padding: 2% 0;
-    font-size: 1.2rem;
-    color: #fff;
-}
-
-header {
-    background: #727171;
-}
-
-footer {
-    background: #727171;
-}
-*/
 
 .application {
   display: flex;
@@ -45,7 +32,8 @@ body::-webkit-scrollbar{
     display: none;
 }
 
-.side-nav{ 
+.side-nav{
+    position: fixed;
     box-sizing: border-box;
     width: 250px;
     background: #215968;
@@ -54,6 +42,7 @@ body::-webkit-scrollbar{
 .side-area{
     /*width: 15%;　ここの横幅はページごとに指定する*/
     text-align: center;
+    margin-left: 250px;
 }
 
 
@@ -76,6 +65,7 @@ body::-webkit-scrollbar{
 .category-list {
     list-style: none;
     padding-inline-start:0;
+    margin: 0;
 }
 .category-list a {
     color: white;

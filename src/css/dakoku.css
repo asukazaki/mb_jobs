@@ -39,18 +39,18 @@
     font-size: 7em;
 }
 
-.dakoku-buttun-wrapper ul {
+.dakoku-button-wrapper ul {
     padding-inline-start: 0;/*user agent stylesheet 打ち消し*/
 }
 
-.dakoku-buttun-wrapper li {
+.dakoku-button-wrapper li {
     list-style: none;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.dakoku-buttun-wrapper button {
+.dakoku-button-wrapper button {
     width: 10em;
     height: 10em;
     border-radius: 10em;

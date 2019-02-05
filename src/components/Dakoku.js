@@ -28,7 +28,7 @@ export default class Dakoku extends React.Component {
         </aside>
 
         <main className="content time">
-            <div className="dakoku-buttun-wrapper">
+            <div className="dakoku-button-wrapper">
                 <ul>
                     <li className="shutaikin">
                         <button className="shukkin" onClick={(e) => postDakoku(id,'SYUKKIN')}>出勤</button>
