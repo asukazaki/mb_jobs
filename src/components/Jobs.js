@@ -16,6 +16,7 @@ const InputArea = styled.input`
 
 const Tr = styled.tr`
     background-color: ${(props:  ValidateProps) => props.isValid ? 'transparent' : '#f5c6cb'};
+    border-bottom:1px #727171 solid;
 `
 
 const ValidateComment = styled.div`
@@ -53,7 +54,7 @@ export default class Jobs extends React.Component {
                 <div class="name">ITI 太郎</div>
                 <div class="zangyo-summary">
                     <span>残業時間合計</span>
-                    <table class="zangyo-summary-table">
+                    <table id="zangyo-summary-table" class="zangyo-summary-table">
                     <tbody><tr><th>今月</th></tr>
                 <tr><td>--:--</td></tr>
                 <tr><th>3か月</th></tr>
@@ -63,9 +64,9 @@ export default class Jobs extends React.Component {
                 </tbody></table>
                 </div>
 
-                <div>
+                <div id="dakoku-edit" class="dakoku-edit">
                     <button onClick={(e) => this.props.updateJobs(id,year,month,kintais)}>打刻修正</button>
-                    <div>
+                    <div class="result-message-area">
                         { error && <p>更新に失敗しました</p>}
                         { !error && <p> {this.props.updateMessages}</p>}
                     </div>
@@ -86,8 +87,8 @@ export default class Jobs extends React.Component {
                             <th class="kintai-main-table-header__cell sticky">日付</th>
                             <th class="kintai-main-table-header__cell sticky">出勤</th>
                             <th class="kintai-main-table-header__cell sticky">退勤</th>
-                            {/* <th class="kintai-main-table-header__cell sticky">休憩開始</th> */}
-                            {/* <th class="kintai-main-table-header__cell sticky">休憩終了</th> */}
+                            <th class="kintai-main-table-header__cell sticky">休憩開始</th>
+                            <th class="kintai-main-table-header__cell sticky">休憩終了</th>
                             <th class="kintai-main-table-header__cell sticky">総労働時間</th>
                             <th class="kintai-main-table-header__cell sticky">休憩時間</th>
                             <th class="kintai-main-table-header__cell sticky">残業時間</th>
@@ -97,27 +98,25 @@ export default class Jobs extends React.Component {
 
                                 {kintais.map((item,index) => (
                                     <Tr isValid={!item.dakokuError} key={`${item.date}_row`}>
-                                    <td key={`${item.date}_date`} class={getDayOfWeek(item)}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}{item.firstErrorMessage}</td>
-                                    {/* <td key={`${item.date}_start`}> {item.startTime}</td> */}
-                                    <td key={`${item.date}_start`}>
-                                        <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
-                                                   onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
-                                                   onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
-                                            <ValidateComment>
-                                                {item.startTimeMessages}
-                                            </ValidateComment>
-                                    </td>
-                                    <td key={`${item.date}_end`}>
-                                        <InputArea isValid={(item.endTimeValidate)} type="text" disabled={(item.endTime == "-") ? "disabled" : ""} name="endTime" value={item.endTime}
-                                                   onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
-                                                   onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
-                                            <ValidateComment>
-                                                {item.endTimeMessages}
-                                            </ValidateComment>
-                                    </td>
-                                        {/* <td key={`${item.date}_end`} class="kintai-month-table-body__cell"> {item.endTime}</td> */}
-                                        {/* <td key={`${item.date}_restStart`} class="kintai-month-table-body__cell"> {item.restStartTime}</td> */}
-                                        {/* <td key={`${item.date}_restEnd`} class="kintai-month-table-body__cell"> {item.restEndTime}</td> */}
+                                        <td key={`${item.date}_date`} class={getDayOfWeek(item)}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}{item.firstErrorMessage}</td>
+                                        <td key={`${item.date}_start`}>
+                                            <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
+                                                       onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                                       onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
+                                                <ValidateComment>
+                                                    {item.startTimeMessages}
+                                                </ValidateComment>
+                                        </td>
+                                        <td key={`${item.date}_end`}>
+                                            <InputArea isValid={(item.endTimeValidate)} type="text" disabled={(item.endTime == "-") ? "disabled" : ""} name="endTime" value={item.endTime}
+                                                       onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
+                                                       onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
+                                                <ValidateComment>
+                                                    {item.endTimeMessages}
+                                                </ValidateComment>
+                                        </td>
+                                        <td key={`${item.date}_restStart`} class="kintai-month-table-body__cell"> {item.restStartTime}</td>
+                                        <td key={`${item.date}_restEnd`} class="kintai-month-table-body__cell"> {item.restEndTime}</td>
                                         <td key={`${item.date}_workPerDay`} class="kintai-month-table-body__cell">{item.workPerDay} </td>
                                         <td key={`${item.date}_restPerDay`} class="kintai-month-table-body__cell"> {item.restPerDay}</td>
                                         <td key={`${item.date}_overTimePerDay`} class="kintai-month-table-body__cell"> {item.overTimePerDay}</td>
@@ -188,7 +187,7 @@ const getDayOfWeek = (item)=> {
         return "holiday"
     }else if(item.dayOfWeek === 6){
         return "saturday"
-    } else if(item.dayOfWeek == 7){
+    } else if(item.dayOfWeek === 7){
         return "sunday"
     }
 }

@@ -11,6 +11,20 @@
     margin-top: 1.5em;
 }
 
+.dakoku-edit{
+    position:fixed;
+    left:calc(250px + 1em)
+}
+
+.dakoku-edit button {
+    width: 6em;
+    height: 3em;
+    background: rgb(245, 207, 98);
+    color: rgb(120, 69, 16);
+    border-radius: 5px;
+    border: 1px solid rgb(253, 225, 205);
+}
+
 
 /* ボタンは画像で用意したほうがいいかも。。。*/
 .change-button {
@@ -84,7 +98,9 @@
 }
 
 .zangyo-summary {
+    margin-left: 5%;
     margin-top: 2em;
+    margin-bottom: 2em;
 }
 .zangyo-summary span{
     color:#215968;
@@ -119,9 +135,9 @@
 }
 
 /*偶数(even)列に背景色　nth-child(n)--->兄弟要素のnごとになにかする*/
-/* .kintai-month-table-body__cell:nth-child(even) { 
-    background: #d1d6d6;
-} */
+.kintai-month-table-body__cell:nth-child(even) {
+    background: #f2f2f2;;
+}
 
 .saturday {
     color:rgb(59, 116, 201);
