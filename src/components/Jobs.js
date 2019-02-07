@@ -95,11 +95,10 @@ export default class Jobs extends React.Component {
                             </tr>
                             </thead>
                                 <tbody class="kintai-month-table-body">
-
                                 {kintais.map((item,index) => (
                                     <Tr isValid={!item.dakokuError} key={`${item.date}_row`}>
-                                        <td key={`${item.date}_date`} class={getDayOfWeek(item)}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}{item.firstErrorMessage}</td>
-                                        <td key={`${item.date}_start`}>
+                                        <td key={`${item.date}_date`} class={getDayOfWeek(item) + " kintai-month-table-body__cell"}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}<span class="input_error_msg">{item.firstErrorMessage}</span></td>
+                                        <td key={`${item.date}_start`} class="kintai-month-table-body__cell">
                                             <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
                                                        onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
                                                        onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
@@ -107,7 +106,7 @@ export default class Jobs extends React.Component {
                                                     {item.startTimeMessages}
                                                 </ValidateComment>
                                         </td>
-                                        <td key={`${item.date}_end`}>
+                                        <td key={`${item.date}_end`} class="kintai-month-table-body__cell">
                                             <InputArea isValid={(item.endTimeValidate)} type="text" disabled={(item.endTime == "-") ? "disabled" : ""} name="endTime" value={item.endTime}
                                                        onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
                                                        onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
@@ -189,5 +188,7 @@ const getDayOfWeek = (item)=> {
         return "saturday"
     } else if(item.dayOfWeek === 7){
         return "sunday"
+    } else {
+        return "" //undefinedだと困る時があるため
     }
 }
