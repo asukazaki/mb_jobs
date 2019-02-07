@@ -135,19 +135,33 @@
 }
 
 /*偶数(even)列に背景色　nth-child(n)--->兄弟要素のnごとになにかする*/
-.kintai-month-table-body__cell:nth-child(even) {
-    background: #f2f2f2;;
-}
+/*.kintai-month-table-body__cell:nth-child(even) { いったん無しで
+    background: #f2f2f2;
+}*/
 
 .saturday {
     color:rgb(59, 116, 201);
 }
 
-.sunday {
+.sunday, .holiday {
     color:rgb(201, 59, 83);
 }
 
-.holiday {
-    margin:0.25em 0.5em 0 0.5em;
-    background: rgb(238, 209, 214);
+.input_error_msg{
+    display: block;
+    font-size: 10px;
 }
+.kintai-month-table-body__cell{
+    padding-left: 10px;
+}
+.kintai-month-table-body__cell > input {
+    height: 30px;
+    background-color: lightgoldenrodyellow;
+    font-size: 1em;
+    border-bottom: 1px solid gainsboro;
+    border-top: 1px solid gainsboro;
+    border-left: none;
+    border-right: none;
+}
+
+
