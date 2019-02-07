@@ -97,7 +97,7 @@ export default class Jobs extends React.Component {
                                 <tbody class="kintai-month-table-body">
                                 {kintais.map((item,index) => (
                                     <Tr isValid={!item.dakokuError} key={`${item.date}_row`}>
-                                        <td key={`${item.date}_date`} class={getDayOfWeek(item) + " kintai-month-table-body__cell"}> {item.date}({item.dayOfWeekDisplayName}){item.holydayName}<span class="input_error_msg">{item.firstErrorMessage}</span></td>
+                                        <td key={`${item.date}_date`} class={getDayOfWeek(item) + " kintai-month-table-body__cell"}> {item.date}({item.dayOfWeekDisplayName})<span class="input_error_msg">{item.holydayName}</span><span class="input_error_msg">{item.firstErrorMessage}</span></td>
                                         <td key={`${item.date}_start`} class="kintai-month-table-body__cell">
                                             <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
                                                        onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
@@ -123,7 +123,7 @@ export default class Jobs extends React.Component {
                                 ))}
                                 </tbody>
                             </table>
-                            <p>月の残業時間合計：　{monthOverTime} h </p>
+                            <p>月の残業時間合計：　{Math.floor(monthOverTime * Math.pow(10,1)) / Math.pow(10,1)} h </p>
                             </div>
                         );
                     }
