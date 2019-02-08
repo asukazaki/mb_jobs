@@ -99,7 +99,7 @@ export default class Jobs extends React.Component {
                                     <Tr isValid={!item.dakokuError} key={`${item.date}_row`}>
                                         <td key={`${item.date}_date`} class={getDayOfWeek(item) + " kintai-month-table-body__cell"}> {item.date}({item.dayOfWeekDisplayName})<span class="input_error_msg">{item.holydayName}</span><span class="input_error_msg">{item.firstErrorMessage}</span></td>
                                         <td key={`${item.date}_start`} class="kintai-month-table-body__cell">
-                                            <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.startTime == "-") ? "disabled" : ""} name="startTime" value={item.startTime}
+                                            <InputArea isValid={(item.startTimeValidate)} type="text" disabled={(item.futureDate) ? "disabled" : ""} name="startTime" value={item.startTime}
                                                        onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
                                                        onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
                                                 <ValidateComment>
@@ -107,7 +107,7 @@ export default class Jobs extends React.Component {
                                                 </ValidateComment>
                                         </td>
                                         <td key={`${item.date}_end`} class="kintai-month-table-body__cell">
-                                            <InputArea isValid={(item.endTimeValidate)} type="text" disabled={(item.endTime == "-") ? "disabled" : ""} name="endTime" value={item.endTime}
+                                            <InputArea isValid={(item.endTimeValidate)} type="text" disabled={(item.futureDate) ? "disabled" : ""} name="endTime" value={item.endTime}
                                                        onChange={(e) => this.props.execValidation(index,kintais,e.target.name, e.target.value, e.type,item.jobStateCode)}
                                                        onBlur={(e) => this.props.execValidation(index, kintais,e.target.name,e.target.value,e.type,item.jobStateCode)} required />
                                                 <ValidateComment>

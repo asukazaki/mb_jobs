@@ -20,7 +20,7 @@ const getKintaiInfo = response => {
             holydayName: item.holydayName,
             dakokuError: item.dakokuError,
             firstErrorMessage: (item.errorMessages) ? item.errorMessages[0]:undefined,
-            futureDate: false,
+            futureDate: item.futureDate,
 
             // validation
             startTimeValidate : true,
