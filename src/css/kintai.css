@@ -13,7 +13,7 @@
 
 .dakoku-edit{
     position:fixed;
-    left:calc(250px + 1em)
+    text-align: left;
 }
 
 .dakoku-edit button {
