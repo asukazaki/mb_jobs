@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import EventListener from 'react-event-listener';
+import ReactDOM from 'react-dom';
 import styled from "styled-components";
 
 import '../css/common.css'
@@ -29,6 +31,16 @@ const ValidateComment = styled.div`
 `
 
 export default class Jobs extends React.Component {
+    //ブラウザ幅変更時のイベント処理サンプル
+    handleResize = () => {
+        // 打刻修正ボタン　のmargin-left位置を　残業時間合計　の表と同じにする
+        const edit = ReactDOM.findDOMNode(this.refs.edit);
+        //%とかで指定していると、素直にelement.style.marginLeftで値が取れないようだ
+        const summaryLeft = parseFloat(window.getComputedStyle(this.refs.zangyosummary).getPropertyValue('margin-left'));
+        const tableLeft = parseFloat(window.getComputedStyle(this.refs.summarytable).getPropertyValue('margin-left'));
+        edit.style.marginLeft = summaryLeft +  tableLeft + "px";
+    };
+
     componentWillMount(){
         //document.body.style.overflow = "auto";
         this.props.onMount(this.props.id,this.props.year,this.props.month);
@@ -45,6 +57,10 @@ export default class Jobs extends React.Component {
         return(
 
         <React.Fragment>
+            <EventListener
+                target="window"
+                onResize={this.handleResize}
+            />
             <aside class="side-area">
                 <div class="change-button">
                 <Link to={getLastMonthUrl(id,year,month)}><button class="left arrow"></button></Link>
@@ -52,9 +68,9 @@ export default class Jobs extends React.Component {
                 <Link to={getNextMonthUrl(id,year,month)}><button class="right arrow"></button></Link>
                 </div>
                 <div class="name">ITI 太郎</div>
-                <div class="zangyo-summary">
+                <div class="zangyo-summary" ref={"zangyosummary"}>
                     <span>残業時間合計</span>
-                    <table id="zangyo-summary-table" class="zangyo-summary-table">
+                    <table id="zangyo-summary-table" class="zangyo-summary-table" ref={"summarytable"}>
                     <tbody><tr><th>今月</th></tr>
                 <tr><td>--:--</td></tr>
                 <tr><th>3か月</th></tr>
@@ -64,7 +80,7 @@ export default class Jobs extends React.Component {
                 </tbody></table>
                 </div>
 
-                <div id="dakoku-edit" class="dakoku-edit">
+                <div class="dakoku-edit" ref={"edit"}>
                     <button onClick={(e) => this.props.updateJobs(id,year,month,kintais)}>打刻修正</button>
                     <div class="result-message-area">
                         { error && <p>更新に失敗しました</p>}
