@@ -164,4 +164,9 @@
     border-right: none;
 }
 
+.kintai-month-table-body__cell > input[type="text"][disabled] {
+    background-color: initial;
+    border: none;
+}
+
 
