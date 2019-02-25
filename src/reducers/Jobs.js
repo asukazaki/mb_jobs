@@ -55,7 +55,8 @@ const initialState = {
     kintais : undefined,
     monthOverTime : undefined,
     error: false,
-    updateMessages: undefined
+    updateMessages: undefined,
+    canUpdateJobs: true
 };
 
 export default (state = initialState, action) => {
@@ -66,7 +67,8 @@ export default (state = initialState, action) => {
                 id : action.payload.id,
                 kintais : undefined,
                 monthOverTime : undefined,
-                error: false
+                error: false,
+                canUpdateJobs : true,
             };
 
         case 'RECEIVE_DATA':
@@ -97,6 +99,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 kintais : setKintaisValidation(action,isValid,message,onBlurCheck),
+                canUpdateJobs : isValid
             }
         case 'RECEIVE_UPDATE_DATA':
             const updatedJobsCount = action.payload.response.body.length;

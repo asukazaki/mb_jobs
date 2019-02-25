@@ -53,7 +53,7 @@ export default class Jobs extends React.Component {
     }
 
     render(){
-        const {id,year,month,kintais, monthOverTime,error} = this.props;
+        const {id,year,month,kintais, monthOverTime,error, canUpdateJobs} = this.props;
         return(
 
         <React.Fragment>
@@ -81,7 +81,7 @@ export default class Jobs extends React.Component {
                 </div>
 
                 <div class="dakoku-edit" ref={"edit"}>
-                    <button onClick={(e) => this.props.updateJobs(id,year,month,kintais)}>打刻修正</button>
+                    <button disabled={!canUpdateJobs ? "disabled" : ""}  onClick={(e) => this.props.updateJobs(id,year,month,kintais)}>打刻修正</button>
                     <div class="result-message-area">
                         { error && <p>更新に失敗しました</p>}
                         { !error && <p> {this.props.updateMessages}</p>}

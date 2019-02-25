@@ -16,6 +16,7 @@ const mapStateToProps = (state, ownProps) => ({
     monthOverTime:state.Jobs.monthOverTime,
     error:state.Jobs.error,
     updateMessages : state.Jobs.updateMessages!==undefined ? state.Jobs.updateMessages : "",
+    canUpdateJobs : state.Jobs.canUpdateJobs,
 });
 
 /*
